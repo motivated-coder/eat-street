@@ -11,6 +11,13 @@
 
     <modules>
         <module>Order</module>
+        <module>User</module>
+        <module>Restaurant</module>
+        <module>Cart</module>
+        <module>Payment</module>
+        <module>Delivery</module>
+        <module>Rating</module>
+        <module>UserHistory</module>
     </modules>
 
     <parent>
@@ -26,6 +33,51 @@
         <spring.boot.version>3.0.1</spring.boot.version>
         <spring.boot.maven.plugin.version>3.0.1</spring.boot.maven.plugin.version>
     </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>com.skd</groupId>
+                <artifactId>User</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.skd</groupId>
+                <artifactId>Order</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.skd</groupId>
+                <artifactId>Cart</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.skd</groupId>
+                <artifactId>Restaurant</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.skd</groupId>
+                <artifactId>Payment</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.skd</groupId>
+                <artifactId>UserHistory</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.skd</groupId>
+                <artifactId>Rating</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.skd</groupId>
+                <artifactId>Delivery</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 
     <dependencies>
         <dependency>

@@ -9,7 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>Order</artifactId>
+    <artifactId>Rating</artifactId>
 
     <properties>
         <maven.compiler.source>17</maven.compiler.source>
@@ -19,11 +19,11 @@
     <dependencies>
         <dependency>
             <groupId>com.skd</groupId>
-            <artifactId>User</artifactId>
+            <artifactId>Restaurant</artifactId>
         </dependency>
         <dependency>
             <groupId>com.skd</groupId>
-            <artifactId>Restaurant</artifactId>
+            <artifactId>User</artifactId>
         </dependency>
     </dependencies>
 

@@ -9,7 +9,6 @@ import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
-
 @Entity
 @Table(name = "es_orders")
 @AllArgsConstructor
@@ -17,11 +16,11 @@ import java.util.UUID;
 @Builder
 @Getter
 @Setter
-@ToString
 public class Order {
     @Id
     @Column(name = "id")
-    private UUID orderId;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long orderId;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "order_state")
@@ -37,6 +36,17 @@ public class Order {
     @Column(name = "total_price")
     private BigDecimal total;
 
+    @Column(name = "delivery_address")
+    private String deliveryAddress;
+
     @OneToMany(mappedBy = "order", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<OrderItem> orderItems;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
+    private UserInfo user;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "restaurant_id")
+    private Restaurant restaurant;
 }

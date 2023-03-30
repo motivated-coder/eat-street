@@ -1,0 +1,138 @@
+Here is how different entities and their fields are structured
+
+
+User Service:
+
+User entity:
+------
+id (unique identifier)
+name
+email
+password (encrypted)
+address
+phone number
+----
+Restaurant Service:
+
+Restaurant entity:
+-------
+id (unique identifier)
+name
+description
+address
+phone number
+menu items (a list of menu items offered by the restaurant)
+-----
+
+Menu Item entity:
+--------
+id (unique identifier)
+name
+description
+price
+Cart Service:
+Cart entity:
+id (unique identifier)
+user (a reference to the user who owns the cart)
+items (a list of items in the cart)
+total price
+------
+
+Payment Service:
+---------
+Payment entity:
+------
+id (unique identifier)
+user (a reference to the user who made the payment)
+order (a reference to the order that was paid for)
+payment method
+amount
+-------
+
+Order Service:
+------
+Order entity:
+------
+id (unique identifier)
+user (a reference to the user who placed the order)
+restaurant (a reference to the restaurant the order is from)
+items (a list of items in the order)
+total price
+status (e.g. received, preparing, ready, delivered)
+delivery address
+delivery time
+--------
+Delivery Service:
+
+Delivery entity:
+------
+id (unique identifier)
+order (a reference to the order being delivered)
+delivery person (a reference to the delivery person assigned to the order)
+status (e.g. on the way, delivered)
+-----
+
+Rating Service:
+Rating entity:
+-----
+id (unique identifier)
+user (a reference to the user who made the rating)
+restaurant (a reference to the restaurant being rated)
+rating (a score from 1-5)
+feedback (optional comments)
+-----
+
+User History Service:
+
+Order History entity:
+-------
+id (unique identifier)
+user (a reference to the user who placed the order)
+orders (a list of orders placed by the user)
+
+
+
+
+Some very important questions
+------------
+Q1. Here what is the relationship between items of order,  items of cart and items of restaurant
+
+The items in an order are typically selected by the user from the menu items offered by the restaurant.
+When a user adds items to their cart, they are essentially creating a temporary list of items that they intend to order.
+Once the user proceeds to checkout, the items in the cart are used to create the actual order.
+Therefore, the items in the cart are a subset of the items in the order.
+
+In terms of the relationship between the items of the order and the items of the restaurant,
+the items in the order are typically instances of the menu items offered by the restaurant.
+This means that the items in the order are related to the items of the restaurant through a
+reference to the menu item entity. For example, when a user selects a menu item from the restaurant,
+the item selected in the order entity would be a reference to the menu item entity associated with the selected menu item.
+-------
+
+Q2. Ok tell me why MenuItem has @ManyToOne relationship with OrderItem and CartItem ?
+
+The MenuItem entity has a @ManyToOne relationship with both OrderItem and CartItem entities because each OrderItem and
+CartItem is associated with one MenuItem, but a single MenuItem can be associated with multiple OrderItems and CartItems.
+
+For example, when a user adds an item to their cart, a CartItem is created that references the corresponding MenuItem.
+Similarly, when a user places an order, an OrderItem is created that references the corresponding MenuItem.
+In both cases, a MenuItem can be associated with multiple CartItems or OrderItems, but each CartItem or OrderItem is
+associated with only one MenuItem.
+
+Therefore, the @ManyToOne relationship allows us to map the associations between MenuItem, CartItem, and OrderItem in the database.
+--------
+
+Q3. When you say "a MenuItem can be associated with multiple CartItems or OrderItems" , here do you mean cartItems of different
+orders and thus different orderItems
+
+Yes, that's correct. When I say that a MenuItem can be associated with multiple CartItems or OrderItems, I mean that
+different CartItems or OrderItems from different orders can reference the same MenuItem.
+
+For example, let's say a MenuItem represents a pizza with a certain set of toppings. If a user adds this pizza to their
+cart, a CartItem is created that references this MenuItem. Later, if another user adds the same pizza to their cart,
+a new CartItem is created that also references the same MenuItem. Similarly, when users place orders that include this
+pizza, multiple OrderItems can be created that reference the same MenuItem.
+
+In this way, multiple CartItems or OrderItems can reference the same MenuItem, even if they belong to different orders
+or different users.
+--------

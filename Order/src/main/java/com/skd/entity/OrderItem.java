@@ -10,34 +10,30 @@ import java.math.BigDecimal;
 import java.util.UUID;
 
 @Entity
-@Table(name = "es_order_item")
+@Table(name = "es_order_items")
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
 @Getter
 @Setter
-@ToString
 public class OrderItem {
     @Id
     @Column(name = "id")
-    private UUID orderItemId;
-
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long orderItemId;
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "order_id")
     private Order order;
 
-    @Column(name = "name")
-    @NotNull
-    private String name;
-
     @Enumerated(EnumType.STRING)
     private OrderItemType orderItemType;
-
-    @Column(name = "price")
-    private BigDecimal price;
 
     @Column(name="qty")
     @Max(value = 5, message = "cannot place more than 5 items in a single order")
     @NotNull
     private Integer quantity;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "menu_item_id")
+    private MenuItem menuItem;
 }
