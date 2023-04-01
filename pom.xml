@@ -18,12 +18,14 @@
         <module>Delivery</module>
         <module>Rating</module>
         <module>UserHistory</module>
+        <module>Discovery-Server</module>
+        <module>api-gateway</module>
     </modules>
 
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.0.1</version>
+        <version>2.7.8</version>
         <relativePath/>
     </parent>
 
@@ -31,6 +33,7 @@
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
         <spring.boot.version>3.0.1</spring.boot.version>
+        <spring.cloud.version>2021.0.3</spring.cloud.version>
         <spring.boot.maven.plugin.version>3.0.1</spring.boot.maven.plugin.version>
     </properties>
 
@@ -76,6 +79,13 @@
                 <artifactId>Delivery</artifactId>
                 <version>${project.version}</version>
             </dependency>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${spring.cloud.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
@@ -105,6 +115,10 @@
             <artifactId>validation-api</artifactId>
             <version>2.0.1.Final</version>
         </dependency>
+<!--        <dependency>-->
+<!--            <groupId>org.springframework.boot</groupId>-->
+<!--            <artifactId>spring-boot-starter-security</artifactId>-->
+<!--        </dependency>-->
     </dependencies>
 
     <build>
