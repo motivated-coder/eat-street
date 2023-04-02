@@ -10,6 +10,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -22,10 +23,15 @@ public class UserMapper {
         UserInfo userInfo = new UserInfo();
         BeanUtils.copyProperties(userDTO,userInfo);
         userInfo.setPassword(passwordEncoder.encode(userDTO.getPassword()));
-        userInfo.setRole(Role.valueOf(userDTO.getRole()));
+        userInfo.setRoles(toRoles(userDTO));
         userInfo.setAddresses(toAddress(userDTO));
         userInfo.getAddresses().stream().forEach(address -> address.setUser(userInfo));
         return userInfo;
+    }
+
+    private List<Role> toRoles(UserDTO userDTO) {
+        List<String> strings = Arrays.stream(userDTO.getRoles().split(",")).collect(Collectors.toList());
+        return strings.stream().map(s -> Role.valueOf(s)).collect(Collectors.toList());
     }
 
     private List<Address> toAddress(UserDTO userDTO) {
@@ -42,7 +48,6 @@ public class UserMapper {
     public UserDTO toUserDTO(UserInfo userInfo){
         UserDTO userDTO = new UserDTO();
         BeanUtils.copyProperties(userInfo,userDTO);
-        userDTO.setRole(userInfo.getRole().name());
         userDTO.setPassword(userDTO.getPassword());
         userDTO.setAddress(toAddressDTO(userInfo));
         return userDTO;
