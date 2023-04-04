@@ -38,7 +38,7 @@ public class SecurityConfig{
 //                .and()
 //                .authorizeHttpRequests()
 //                .antMatchers("/users/admin/**")
-//                .hasAnyRole("ADMIN","SUPERADMIN")
+//                .hasAnyRole("SUPERADMIN")
 //                .antMatchers("/users/**")
 //                .hasAnyRole("ADMIN","SUPERADMIN","USER")
 //                .anyRequest()

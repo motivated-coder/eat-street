@@ -1,5 +1,6 @@
 package com.skd.service;
 
+import com.skd.entity.UserInfo;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -49,8 +50,9 @@ public class JwtService {
         final String username = extractUsername(token);
         return (username.equals(userDetails.getUsername()) && !isTokenExpired(token));
     }
-    public String generateToken(String username){
+    public String generateToken(String username, UserInfo userInfo){
         Map<String, Object> claims = new HashMap<>();
+        claims.put("roles",userInfo.getRoles());
         return createToken(claims,username);
     }
 

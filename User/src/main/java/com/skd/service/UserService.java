@@ -32,4 +32,8 @@ public class UserService {
     public UserDTO fetchById(Long user_id) {
         return userMapper.toUserDTO(userRepository.findById(user_id).orElseThrow(() -> new UserNotFoundException("User doesn't exist")));
     }
+
+    public UserInfo findByName(String username) {
+        return userRepository.findByFirstName(username).orElseThrow(NullPointerException::new);
+    }
 }
