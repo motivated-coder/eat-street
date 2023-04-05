@@ -16,6 +16,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.*;
 
@@ -41,14 +42,19 @@ public class UserController {
     }
 
     @GetMapping("/admin/fetchAll")
-    @RoleAllowed({"ROLE_ADMIN", "ROLE_SUPERADMIN"})
+//    @RoleAllowed({"ROLE_ADMIN", "ROLE_SUPERADMIN"})
     public ResponseEntity<?> getAllUsers() {
         List<UserDTO> userDTOS = userService.fetchAllUsers();
         return new ResponseEntity<>(userDTOS, HttpStatus.OK);
     }
 
+    @GetMapping("/validateToken")
+//    @RoleAllowed({"ROLE_ADMIN", "ROLE_SUPERADMIN"})
+    public Boolean validateToken(String token, UserDetails userDetails) {
+        return jwtService.validateToken(token,userDetails);
+    }
+
     @GetMapping("/{user_id}")
-    @RoleAllowed("SUPERADMIN,ADMIN,USER")
     public ResponseEntity<?> getUserById(@PathVariable Long user_id) {
         UserDTO userDTO = userService.fetchById(user_id);
         return new ResponseEntity<>(userDTO, HttpStatus.OK);

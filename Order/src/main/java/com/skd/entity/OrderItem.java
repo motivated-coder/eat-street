@@ -1,9 +1,9 @@
 package com.skd.entity;
 
 import com.skd.enums.OrderItemType;
-import jakarta.persistence.*;
 import lombok.*;
 
+import javax.persistence.*;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;

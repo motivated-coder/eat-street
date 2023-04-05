@@ -31,4 +31,6 @@ public class UserInfo {
     private String phoneNumber;
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     List<Address> addresses;
+    private Integer totalOrderPlaced;
+    private boolean isPrimeMember;
 }
