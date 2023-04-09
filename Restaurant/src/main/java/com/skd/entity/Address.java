@@ -1,5 +1,6 @@
 package com.skd.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -22,6 +23,7 @@ public class Address {
     private String landmark;
     @ManyToOne
     @JoinColumn(name = "user_id")
+    @JsonIgnore
     private Restaurant restaurant;
 
 }

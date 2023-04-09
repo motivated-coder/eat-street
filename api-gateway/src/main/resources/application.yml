@@ -15,6 +15,12 @@ spring:
             - Path=/users/**
           filters:
             - AuthenticationFilter
+        - id: RestaurantApplication
+          uri: lb://RestaurantApplication
+          predicates:
+            - Path=/restaurants/**
+          filters:
+            - AuthenticationFilter
         - id: Service-Discovery
           uri: http://localhost:8761
           predicates:

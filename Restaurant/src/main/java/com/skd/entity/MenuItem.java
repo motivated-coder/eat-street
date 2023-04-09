@@ -1,5 +1,6 @@
 package com.skd.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.skd.enums.ItemType;
 import com.skd.enums.ItemUnit;
 import lombok.AllArgsConstructor;
@@ -31,6 +32,7 @@ public class MenuItem {
     private boolean isAvailable;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "restaurant_id")
+    @JsonIgnore
     private Restaurant restaurant;
     // getters and setters
 }
