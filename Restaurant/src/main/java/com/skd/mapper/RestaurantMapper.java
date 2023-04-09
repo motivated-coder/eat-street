@@ -31,7 +31,7 @@ public class RestaurantMapper {
         return restaurant;
     }
 
-    private List<MenuItem> toMenuItem(List<MenuItemDTO> menuItems) {
+    public List<MenuItem> toMenuItem(List<MenuItemDTO> menuItems) {
         return menuItems.stream().map(menuItemDTO -> MenuItem.builder()
                         .name(menuItemDTO.getName())
                         .description(menuItemDTO.getDescription())
@@ -44,7 +44,7 @@ public class RestaurantMapper {
 
     }
 
-    private List<Address> toAddress(List<AddressDTO> addresses) {
+    public List<Address> toAddress(List<AddressDTO> addresses) {
         return addresses.stream().map(addressDTO -> Address.builder()
                         .street(addressDTO.getStreet())
                         .pincode(addressDTO.getPincode())
@@ -70,7 +70,7 @@ public class RestaurantMapper {
         return restaurantDTO;
     }
 
-    private List<MenuItemDTO> toMenuItemDTO(List<MenuItem> menuItems) {
+    public List<MenuItemDTO> toMenuItemDTO(List<MenuItem> menuItems) {
         return menuItems.stream().map(menuItem -> MenuItemDTO.builder()
                         .id(menuItem.getId())
                         .name(menuItem.getName())
@@ -83,7 +83,7 @@ public class RestaurantMapper {
                 .collect(Collectors.toList());
     }
 
-    private List<AddressDTO> toAddressDTO(List<Address> addresses) {
+    public List<AddressDTO> toAddressDTO(List<Address> addresses) {
         return addresses.stream().map(address -> AddressDTO.builder()
                         .id(address.getId())
                         .street(address.getStreet())

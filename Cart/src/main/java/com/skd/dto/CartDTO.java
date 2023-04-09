@@ -1,6 +1,7 @@
-package com.skd.entity;
+package com.skd.dto;
 
-
+import com.skd.entity.CartItem;
+import com.skd.entity.UserInfo;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -11,18 +12,13 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
-@Entity
-@Table(name = "es_carts")
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class Cart {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class CartDTO {
     private Long id;
-    private Long userid;
-    @OneToMany(mappedBy = "cart", cascade = CascadeType.ALL)
-    private List<CartItem> cartItems = new ArrayList<>();
+    private Long userId;
+    private List<CartItemDTO> cartItems;
     private BigDecimal totalPrice;
 }
