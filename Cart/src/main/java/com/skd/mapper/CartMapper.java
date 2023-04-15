@@ -35,8 +35,10 @@ public class CartMapper {
     }
 
     private List<CartItem> toCartItem(List<CartItemDTO> cartItems) {
+
         return cartItems.stream().map(cartItemDTO ->
                         CartItem.builder()
+                                .id(cartItemDTO.getId()==null?null: cartItemDTO.getId())
                                 .menuItem(toMenuItem(cartItemDTO.getMenuItem()))
                                 .quantity(cartItemDTO.getQuantity())
                                 .build())
@@ -45,11 +47,13 @@ public class CartMapper {
 
     private MenuItem toMenuItem(MenuItemDTO menuItemDTO) {
         return MenuItem.builder()
+                .id(menuItemDTO.getId())
                 .name(menuItemDTO.getName())
                 .description(menuItemDTO.getDescription())
                 .price(menuItemDTO.getPrice())
                 .itemType(ItemType.valueOf(menuItemDTO.getItemType()))
                 .itemUnit(ItemUnit.valueOf(menuItemDTO.getItemUnit()))
+                .restaurantId(menuItemDTO.getRestaurantId())
                 .build();
     }
 
@@ -66,6 +70,7 @@ public class CartMapper {
         return cartItems.stream().map(cartItem -> CartItemDTO.builder()
                         .id(cartItem.getId())
                         .menuItem(toMenuItemDTO(cartItem.getMenuItem()))
+                        .quantity(cartItem.getQuantity())
                         .build())
                 .collect(Collectors.toList());
     }
@@ -78,6 +83,7 @@ public class CartMapper {
                 .price(menuItem.getPrice())
                 .itemType(menuItem.getItemType().name())
                 .itemUnit(menuItem.getItemUnit().name())
+                .restaurantId(menuItem.getRestaurantId())
                 .build();
     }
 }

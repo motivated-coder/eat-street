@@ -2,9 +2,9 @@ package com.skd.entity;
 
 import com.skd.enums.OrderState;
 import com.skd.enums.OrderType;
-import jakarta.persistence.*;
 import lombok.*;
 
+import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;

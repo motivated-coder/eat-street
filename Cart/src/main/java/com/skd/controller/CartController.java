@@ -23,4 +23,10 @@ public class CartController {
         return new ResponseEntity<>(cartDto, HttpStatus.CREATED);
     }
 
+    @PostMapping("/placeOrder")
+    public ResponseEntity<?> placeOrder(@RequestBody CartDTO cartDTO){
+        CartDTO cartDto = cartService.updateCart(cartDTO);
+        return new ResponseEntity<>(cartDto, HttpStatus.CREATED);
+    }
+
 }
