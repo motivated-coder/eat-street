@@ -1,7 +1,9 @@
 package com.skd.controller;
 
+import com.skd.dto.AddressDTO;
 import com.skd.dto.AuthenticateRequest;
 import com.skd.dto.UserDTO;
+import com.skd.entity.Address;
 import com.skd.entity.UserInfo;
 import com.skd.filter.RoleAllowed;
 import com.skd.mapper.UserMapper;
@@ -22,6 +24,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.security.RolesAllowed;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/users")
@@ -32,6 +35,7 @@ public class UserController {
     private final UserService userService;
     private final AuthenticationManager authenticationManager;
     private final JwtService jwtService;
+    private final UserMapper userMapper;
 
     @PostMapping("/register")
     public ResponseEntity<?> registerUser(@RequestBody UserDTO userDTO) {
@@ -68,5 +72,16 @@ public class UserController {
             return jwtService.generateToken(authenticateRequest.getUsername(), userInfo);
         }else
             throw new UsernameNotFoundException("User doesn't exist");
+    }
+
+    @GetMapping("/{userId}")
+    public List<AddressDTO> fetchAddressByUserId(@PathVariable Long userId){
+        List<Address> addresses = userService.getAddressByUserId(userId);
+        return addresses.stream().map(address -> AddressDTO.builder()
+                .street(address.getStreet())
+                .city(address.getCity())
+                .pincode(address.getPincode())
+                .state(address.getState())
+                .build()).collect(Collectors.toList());
     }
 }

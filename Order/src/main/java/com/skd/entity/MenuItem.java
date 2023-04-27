@@ -1,6 +1,5 @@
 package com.skd.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.skd.enums.ItemType;
 import com.skd.enums.ItemUnit;
 import lombok.AllArgsConstructor;

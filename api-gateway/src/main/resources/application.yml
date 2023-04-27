@@ -15,8 +15,8 @@ spring:
             - Path=/users/**
           filters:
             - AuthenticationFilter
-        - id: CartApplication
-          uri: lb://CartApplication
+        - id: CART
+          uri: lb://CART
           predicates:
             - Path=/carts/**
         - id: RestaurantApplication

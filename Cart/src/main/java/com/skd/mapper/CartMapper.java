@@ -12,6 +12,7 @@ import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Component
@@ -47,7 +48,7 @@ public class CartMapper {
 
     private MenuItem toMenuItem(MenuItemDTO menuItemDTO) {
         return MenuItem.builder()
-                .id(menuItemDTO.getId())
+                .id(menuItemDTO.getId()==null?null: menuItemDTO.getId())
                 .name(menuItemDTO.getName())
                 .description(menuItemDTO.getDescription())
                 .price(menuItemDTO.getPrice())

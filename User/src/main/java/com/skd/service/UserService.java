@@ -1,6 +1,7 @@
 package com.skd.service;
 
 import com.skd.dto.UserDTO;
+import com.skd.entity.Address;
 import com.skd.entity.UserInfo;
 import com.skd.exception.UserNotFoundException;
 import com.skd.mapper.UserMapper;
@@ -35,5 +36,10 @@ public class UserService {
 
     public UserInfo findByName(String username) {
         return userRepository.findByFirstName(username).orElseThrow(NullPointerException::new);
+    }
+
+    public List<Address> getAddressByUserId(Long userId) {
+        UserInfo userInfo = userRepository.findById(userId).orElseThrow(UserNotFoundException::new);
+        return userInfo.getAddresses();
     }
 }
