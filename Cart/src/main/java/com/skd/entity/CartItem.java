@@ -24,5 +24,5 @@ public class CartItem {
     @JoinColumn(name = "menu_item_id")
     private MenuItem menuItem;
     private Integer quantity;
-    // getters and setters
+
 }

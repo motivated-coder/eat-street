@@ -38,15 +38,15 @@ public class CartService {
         newCart.getCartItems().stream().forEach(cartItem -> cartItem.setCart(newCart));
         Cart updatedCart = cartRepository.save(newCart);
         OrderDTO orderToBePlaced = buildOrderDTO(updatedCart);
-        kafkaTemplate.send("Topic1",orderToBePlaced);
+        kafkaTemplate.send("Topic1", orderToBePlaced);
         return cartMapper.toCartDTO(updatedCart);
     }
 
-    public OrderDTO buildOrderDTO(Cart cart){
+    public OrderDTO buildOrderDTO(Cart cart) {
         return OrderDTO.builder()
                 .orderState("NEW")
-                // TODO: write logic
-                .orderType("MIX")
+                // TODO: check logic
+                .orderType(determineOrderType(cart))
                 .placedDate(new Date())
                 .total(cart.getTotalPrice())
                 .orderItemDTOS(toOrderItemDTOs(cart.getCartItems()))
@@ -58,8 +58,8 @@ public class CartService {
     private List<OrderItemDTO> toOrderItemDTOs(List<CartItem> cartItems) {
         return cartItems.stream()
                 .map(cartItem -> OrderItemDTO.builder()
-                        //TODO: write logic
-                        .orderItemType("SOLID_VEG")
+                        //TODO: check logic
+                        .orderItemType(cartItem.getMenuItem().getItemType().name())
                         .quantity(cartItem.getQuantity())
                         .menuItemDTO(toMenuItemDto(cartItem))
                         .build())
@@ -75,5 +75,23 @@ public class CartService {
                 .itemType(cartItem.getMenuItem().getItemType().name())
                 .itemUnit(cartItem.getMenuItem().getItemUnit().name())
                 .build();
+    }
+
+    private String determineOrderType(Cart cart) {
+        StringBuilder s = new StringBuilder();
+        cart.getCartItems().stream()
+                .forEach(cartItem -> {
+                    if (cartItem.getMenuItem().getItemType().toString().contains("NON"))
+                        s.append("N");
+                    else
+                        s.append("V");
+                });
+        String orderState = s.toString();
+        if (orderState.contains("V") && orderState.contains("N"))
+            return "MIX";
+        else if (orderState.contains("V"))
+            return "VEG";
+        else
+            return "NON_VEG";
     }
 }
