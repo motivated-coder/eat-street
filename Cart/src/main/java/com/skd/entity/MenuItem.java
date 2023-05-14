@@ -20,7 +20,8 @@ import java.util.UUID;
 @Data
 public class MenuItem {
     @Id
-    private Long id;
+    private UUID id;
+    private Long menuItemId;
     private String name;
     private String description;
     private BigDecimal price;

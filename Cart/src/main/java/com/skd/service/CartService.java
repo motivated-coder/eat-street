@@ -45,7 +45,6 @@ public class CartService {
     public OrderDTO buildOrderDTO(Cart cart) {
         return OrderDTO.builder()
                 .orderState("NEW")
-                // TODO: check logic
                 .orderType(determineOrderType(cart))
                 .placedDate(new Date())
                 .total(cart.getTotalPrice())
@@ -58,7 +57,6 @@ public class CartService {
     private List<OrderItemDTO> toOrderItemDTOs(List<CartItem> cartItems) {
         return cartItems.stream()
                 .map(cartItem -> OrderItemDTO.builder()
-                        //TODO: check logic
                         .orderItemType(cartItem.getMenuItem().getItemType().name())
                         .quantity(cartItem.getQuantity())
                         .menuItemDTO(toMenuItemDto(cartItem))
@@ -68,6 +66,8 @@ public class CartService {
 
     private MenuItemDTO toMenuItemDto(CartItem cartItem) {
         return MenuItemDTO.builder()
+                .id(cartItem.getMenuItem().getId())
+                .menuItemId(cartItem.getMenuItem().getMenuItemId())
                 .restaurantId(cartItem.getMenuItem().getRestaurantId())
                 .name(cartItem.getMenuItem().getName())
                 .description(cartItem.getMenuItem().getDescription())

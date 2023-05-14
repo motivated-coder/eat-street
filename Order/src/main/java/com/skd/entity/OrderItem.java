@@ -33,7 +33,12 @@ public class OrderItem {
     @NotNull
     private Integer quantity;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "menu_item_id")
+//    @JoinColumns({
+//            @JoinColumn(name="menu_item_key_id", insertable = false, updatable = false),
+//            @JoinColumn(name = "menu_item_key_order_id", insertable = false, updatable = false)
+//    }) //A Very Important concept to understand how to refer or use an entity whose pk is of type @EmbeddedId
+
     private MenuItem menuItem;
 }

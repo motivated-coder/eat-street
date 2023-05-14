@@ -3,6 +3,7 @@ package com.skd.dto;
 import lombok.*;
 
 import java.math.BigDecimal;
+import java.util.UUID;
 
 @Builder
 @AllArgsConstructor
@@ -10,7 +11,8 @@ import java.math.BigDecimal;
 @Getter
 @Setter
 public class MenuItemDTO {
-    private Long id;
+    private UUID id;
+    private Long menuItemId;
     private String name;
     private String description;
     private BigDecimal price;

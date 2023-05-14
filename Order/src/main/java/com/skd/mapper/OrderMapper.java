@@ -11,6 +11,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Component
@@ -40,6 +41,8 @@ public class OrderMapper {
 
     private MenuItem toMenuItem(MenuItemDTO menuItemDTO) {
         return MenuItem.builder()
+                .id(UUID.randomUUID())
+                .menuItemId(menuItemDTO.getMenuItemId())
                 .name(menuItemDTO.getName())
                 .description(menuItemDTO.getDescription())
                 .price(menuItemDTO.getPrice())
@@ -78,6 +81,7 @@ public class OrderMapper {
     private MenuItemDTO toMenuItemDTO(MenuItem menuItem) {
         return MenuItemDTO.builder()
                 .id(menuItem.getId())
+                .menuItemId(menuItem.getMenuItemId())
                 .name(menuItem.getName())
                 .description(menuItem.getDescription())
                 .price(menuItem.getPrice())

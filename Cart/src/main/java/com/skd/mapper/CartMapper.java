@@ -48,7 +48,8 @@ public class CartMapper {
 
     private MenuItem toMenuItem(MenuItemDTO menuItemDTO) {
         return MenuItem.builder()
-                .id(menuItemDTO.getId()==null?null: menuItemDTO.getId())
+                .id(menuItemDTO.getId()==null?UUID.randomUUID(): menuItemDTO.getId())
+                .menuItemId(menuItemDTO.getMenuItemId())
                 .name(menuItemDTO.getName())
                 .description(menuItemDTO.getDescription())
                 .price(menuItemDTO.getPrice())
@@ -79,6 +80,7 @@ public class CartMapper {
     private MenuItemDTO toMenuItemDTO(MenuItem menuItem) {
         return MenuItemDTO.builder()
                 .id(menuItem.getId())
+                .menuItemId(menuItem.getMenuItemId())
                 .name(menuItem.getName())
                 .description(menuItem.getDescription())
                 .price(menuItem.getPrice())
