@@ -4,6 +4,7 @@ import com.skd.enums.OrderState;
 import com.skd.enums.OrderType;
 import lombok.*;
 
+
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.Date;
@@ -36,8 +37,9 @@ public class Order {
     @Column(name = "total_price")
     private BigDecimal total;
 
-    @Column(name = "delivery_address")
-    private String deliveryAddress;
+    @OneToOne
+    @JoinColumn(name = "address_id")
+    private Address address;
 
     @OneToMany(mappedBy = "order", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<OrderItem> orderItems;

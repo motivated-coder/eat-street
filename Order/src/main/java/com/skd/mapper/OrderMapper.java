@@ -1,8 +1,10 @@
 package com.skd.mapper;
 
+import com.skd.dto.AddressDTO;
 import com.skd.dto.MenuItemDTO;
 import com.skd.dto.OrderDTO;
 import com.skd.dto.OrderItemDTO;
+import com.skd.entity.Address;
 import com.skd.entity.MenuItem;
 import com.skd.entity.Order;
 import com.skd.entity.OrderItem;
@@ -22,10 +24,19 @@ public class OrderMapper {
                 .orderType(OrderType.valueOf(orderDTO.getOrderType()))
                 .placedDate(orderDTO.getPlacedDate())
                 .total(orderDTO.getTotal())
-                .deliveryAddress(orderDTO.getDeliveryAddress())
+                .address(toAddress(orderDTO.getAddressDTO()))
                 .orderItems(toOrderItems(orderDTO.getOrderItemDTOS()))
                 .userId(orderDTO.getUserId())
                 .restaurantId(orderDTO.getRestaurantId())
+                .build();
+    }
+
+    private Address toAddress(AddressDTO addressDTO) {
+        return Address.builder()
+                .state(addressDTO.getState())
+                .pincode(addressDTO.getPincode())
+                .city(addressDTO.getCity())
+                .street(addressDTO.getStreet())
                 .build();
     }
 
@@ -59,10 +70,19 @@ public class OrderMapper {
                 .orderType(order.getOrderType().name())
                 .placedDate(order.getPlacedDate())
                 .total(order.getTotal())
-                .deliveryAddress(order.getDeliveryAddress())
+                .addressDTO(toAddressDto(order.getAddress()))
                 .orderItemDTOS(toOrderItemDTOs(order.getOrderItems()))
                 .userId(order.getUserId())
                 .restaurantId(order.getRestaurantId())
+                .build();
+    }
+
+    private AddressDTO toAddressDto(Address address) {
+        return AddressDTO.builder()
+                .state(address.getState())
+                .pincode(address.getPincode())
+                .city(address.getCity())
+                .street(address.getStreet())
                 .build();
     }
 

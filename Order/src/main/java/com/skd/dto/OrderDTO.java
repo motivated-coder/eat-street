@@ -1,14 +1,10 @@
 package com.skd.dto;
 
-import com.skd.entity.OrderItem;
-import com.skd.enums.OrderState;
-import com.skd.enums.OrderType;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
@@ -24,7 +20,7 @@ public class OrderDTO {
     private String orderType;
     private Date placedDate;
     private BigDecimal total;
-    private String deliveryAddress;
+    private AddressDTO addressDTO;
     private List<OrderItemDTO> orderItemDTOS;
     private Long userId;
     private Long restaurantId;

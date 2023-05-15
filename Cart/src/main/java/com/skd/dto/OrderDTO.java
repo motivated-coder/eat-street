@@ -20,7 +20,7 @@ public class OrderDTO {
     private String orderType;
     private Date placedDate;
     private BigDecimal total;
-    private String deliveryAddress;
+    private AddressDTO addressDTO;
     private List<OrderItemDTO> orderItemDTOS;
     private Long userId;
     private Long restaurantId;
