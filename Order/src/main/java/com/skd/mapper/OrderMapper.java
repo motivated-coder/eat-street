@@ -31,7 +31,7 @@ public class OrderMapper {
                 .build();
     }
 
-    private Address toAddress(AddressDTO addressDTO) {
+    public Address toAddress(AddressDTO addressDTO) {
         return Address.builder()
                 .state(addressDTO.getState())
                 .pincode(addressDTO.getPincode())
@@ -77,7 +77,7 @@ public class OrderMapper {
                 .build();
     }
 
-    private AddressDTO toAddressDto(Address address) {
+    public AddressDTO toAddressDto(Address address) {
         return AddressDTO.builder()
                 .state(address.getState())
                 .pincode(address.getPincode())

@@ -20,4 +20,7 @@ public class Address{
     private String city;
     private String state;
 
+    @OneToOne(mappedBy = "address", cascade = CascadeType.ALL)
+    Order order;
+
 }

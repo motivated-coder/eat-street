@@ -37,7 +37,7 @@ public class Order {
     @Column(name = "total_price")
     private BigDecimal total;
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "address_id")
     private Address address;
 
