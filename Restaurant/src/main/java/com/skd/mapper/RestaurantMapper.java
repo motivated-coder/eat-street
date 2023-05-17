@@ -27,6 +27,7 @@ public class RestaurantMapper {
                 .state(State.IN_QUEUE)
                 .addresses(toAddress(restaurantDTO.getAddresses()))
                 .menuItems(toMenuItem(restaurantDTO.getMenuItems()))
+                .servingPincodes(restaurantDTO.getServingPincodes())
                 .build();
         return restaurant;
     }
@@ -66,6 +67,7 @@ public class RestaurantMapper {
                 .state(restaurant.getState().name())
                 .addresses(toAddressDTO(restaurant.getAddresses()))
                 .menuItems(toMenuItemDTO(restaurant.getMenuItems()))
+                .servingPincodes(restaurant.getServingPincodes())
                 .build();
         return restaurantDTO;
     }

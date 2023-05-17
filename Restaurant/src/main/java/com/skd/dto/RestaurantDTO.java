@@ -25,4 +25,5 @@ public class RestaurantDTO {
     private int totalOrdersReceived;
     private List<MenuItemDTO> menuItems = new ArrayList<>();
     private String state;
+    private List<Long> servingPincodes;
 }

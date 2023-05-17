@@ -37,5 +37,6 @@ public class Restaurant {
     @Column(name = "restaurant_state")
     private State state;
     Date registeredDate;
-    // getters and setters
+    @Column(name="serving_pincodes")
+    private List<Long> servingPincodes;
 }
